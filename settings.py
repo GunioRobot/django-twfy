@@ -78,5 +78,5 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'djangowfy.parliament',
+    'django-twfy.parliament',
 )
