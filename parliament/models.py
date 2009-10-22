@@ -131,7 +131,6 @@ class ApiKey(models.Model):
     def __unicode__(self):
         return self.api_key
 
-
 class Member(models.Model):
     id = models.IntegerField(primary_key=True,db_column='member_id')
     house = models.IntegerField(choices=HOUSES_OF_PARLIAMENT)
@@ -152,7 +151,18 @@ class Member(models.Model):
     def __unicode__(self):
         return self.first_name + ' ' + self.last_name
 
-
+class Moffice(models.Model):
+    moffice_id = models.IntegerField(primary_key=True,db_column='moffice_id')
+    dept = models.CharField(max_length=765)
+    position = models.CharField(max_length=600)
+    from_date = models.DateField()
+    to_date = models.DateField()
+    person = models.ForeignKey(Member,db_column='person',to_field='person_id')
+    source = models.CharField(max_length=765)
+    class Meta:
+        db_table = u'moffice'
+	verbose_name = _("Ministerial position")
+        
 class Hansard(models.Model):
     id = models.IntegerField(primary_key=True,db_column='epobject_id')
     gid = models.CharField(unique=True, max_length=255, blank=True)
@@ -173,10 +183,8 @@ class Hansard(models.Model):
     class Meta:
         db_table = u'hansard'
 	verbose_name = _("Hansard object")
-
     def __unicode__(self):
         return unicode(self.gid)
-
 
 class Epobject(Hansard):
     epobject_id = models.OneToOneField('Hansard',db_column='epobject_id',primary_key=True)
@@ -287,17 +295,6 @@ class Mentions(models.Model):
     mentioned_gid = models.CharField(unique=True, max_length=300, blank=True)
     class Meta:
         db_table = u'mentions'
-
-class Moffice(models.Model):
-    moffice_id = models.IntegerField(primary_key=True)
-    dept = models.CharField(max_length=765)
-    position = models.CharField(max_length=600)
-    from_date = models.DateField()
-    to_date = models.DateField()
-    person = models.IntegerField(null=True, blank=True)
-    source = models.CharField(max_length=765)
-    class Meta:
-        db_table = u'moffice'
 
 class PbcMembers(models.Model):
     id = models.IntegerField(primary_key=True)
