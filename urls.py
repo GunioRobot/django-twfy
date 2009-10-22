@@ -1,14 +1,19 @@
 from django.conf.urls.defaults import *
+from parliament.models import Member
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from djangowfy.parliament import views
+from django-twfy.parliament import views
 
 admin.autodiscover()
 
+members_dict = { 'queryset': Member.objects.all(), }
+
+
+
 urlpatterns = patterns('',
     # Example:
-    #(r'^djangowfy/', include('djangowfy.parliament.urls')),
+    #(r'^djangowfy/', include('django-twfy.parliament.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
@@ -16,4 +21,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    
+    
+    (r'^members/$', 'django.views.generic.list_detail.object_list', members_dict),
 )
