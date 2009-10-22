@@ -8,67 +8,75 @@
 # into your database.
 
 from django.db import models
+from django.utils.translation import ugettext as _
 
 CONFIRM_STATES = (
-    (0,'No'),
-    (1,'Yes'),
+    (0,_('No')),
+    (1,_('Yes')),
 )
 
+
+# Included to make admin output on some things legible.  
+# This one should be ported to a 'chambers' model instead but hasn't been yet
+
 HOUSES_OF_PARLIAMENT = (
-    (1,'Dail'),
-    (4,'Seanad'),
+    (1,_('Dail')),
+    (4,_('Seanad')),
 )
 
 ENTER_REASONS = (
-    ('unknown','Unknown'),
-    ('general_election','General Election'),
-    ('by_election','By-election'),
-    ('changed_party','Changed party'),
-    ('reinstated','Reinstated'),
-    ('appointed','Appointed'),
-    ('devolution','Devolution'),
-    ('election','Election'),
-    ('accession','Accession'),
-    ('regional_election','Regional Election'),
-    ('replaced_in_region','Replaced in Region'),
-    ('became_presiding_officer','Became Presiding Officer'),    
+    ('unknown',_('Unknown')),
+    ('general_election',_('General Election')),
+    ('by_election',_('By-election')),
+    ('changed_party',_('Changed party')),
+    ('reinstated',_('Reinstated')),
+    ('appointed',_('Appointed')),
+    ('devolution',_('Devolution')),
+    ('election',_('Election')),
+    ('accession',_('Accession')),
+    ('regional_election',_('Regional Election')),
+    ('replaced_in_region',_('Replaced in Region')),
+    ('became_presiding_officer',_('Became Presiding Officer')),    
 )
 
 LEFT_REASONS = (
-    ('unknown','Unknown'),
-    ('still_in_office','Still in Office'),
-    ('general_election','General Election'),
-    ('general_election_standing','General Election (standing)'),
-    ('general_election_not_standing','General Election (not standing)'),
-    ('changed_party','Changed party'),
-    ('died','Died'),
-    ('declared_void','Declared Void'),
-    ('resigned','Resigned'),
-    ('disqualified','Disqualified'),
-    ('became_peer','Became Peer'),
-    ('devolution','Devolution'),
-    ('dissolution','Dissolution'),
-    ('retired','Retired'),
-    ('regional_election','Regional Election'),
-    ('became_presiding_officer','Became Presiding Officer'),
+    ('unknown',_('Unknown')),
+    ('still_in_office',_('Still in Office')),
+    ('general_election',_('General Election')),
+    ('general_election_standing',_('General Election (standing)')),
+    ('general_election_not_standing',_('General Election (not standing)')),
+    ('changed_party',_('Changed party')),
+    ('died',_('Died')),
+    ('declared_void',_('Declared Void')),
+    ('resigned',_('Resigned')),
+    ('disqualified',_('Disqualified')),
+    ('became_peer',_('Became Peer')),
+    ('devolution',_('Devolution')),
+    ('dissolution',_('Dissolution')),
+    ('retired',_('Retired')),
+    ('regional_election',_('Regional Election')),
+    ('became_presiding_officer',_('Became Presiding Officer')),
 )
 
+# Likewise each of these three lists belongs in Django metamodels but they're
+# here because this is how the original DB works right now
+
 HTYPES = (
-    (10,'Section title'),
-    (11,'Subsection title'),
-    (12,'Speech'),
-    (13,'Procedural'),
+    (10,_('Section title')),
+    (11,_('Subsection title')),
+    (12,_('Speech')),
+    (13,_('Procedural text')),
 )
 
 MAJOR = (
-    (1,'Debates'),
-    (3,'Written Answers'),
-    (7,'Seanad Debates'),
+    (1,_('Debates')),
+    (3,_('Written Answers')),
+    (7,_('Seanad Debates')),
 )
 
 MINOR = (
-    (1,'Question'),
-    (2,'Answer'),
+    (1,_('Question')),
+    (2,_('Answer')),
 )
 
 class Alert(models.Model):
@@ -81,7 +89,7 @@ class Alert(models.Model):
     created = models.DateTimeField()
     class Meta:
         db_table = u'alerts'
-	verbose_name = "Email Alert"
+	verbose_name = _("Email Alert")
     def __unicode__(self):
         return self.email + ":  " + self.criteria
 
@@ -106,7 +114,7 @@ class Twfyuser(models.Model):
     api_key = models.CharField(unique=True, max_length=72, blank=True)
     class Meta:
         db_table = u'users'
-	verbose_name = "TWFY User"
+	verbose_name = _("TWFY User")
     def __unicode__(self):
         return unicode(self.user_id) + " " + self.firstname + " " + self.lastname
 	
@@ -164,7 +172,7 @@ class Hansard(models.Model):
     video_status = models.IntegerField()
     class Meta:
         db_table = u'hansard'
-	verbose_name = "Hansard object"
+	verbose_name = _("Hansard object")
 
     def __unicode__(self):
         return unicode(self.gid)
@@ -175,14 +183,12 @@ class Epobject(Hansard):
     raw_id_fields = ("epobject_id",)
     body = models.TextField(blank=True)
     type = models.IntegerField(null=True, blank=True)
-    #created = models.DateTimeField(null=True, blank=True)
-    #modified = models.DateTimeField(null=True, blank=True)
     class Meta:
         db_table = u'epobject'
     def __unicode__(self):
         return unicode(self.id)
+        
 """
-
 class Editqueue(models.Model):
     edit_id = models.IntegerField(primary_key=True)
     user_id = models.IntegerField(null=True, blank=True)
