@@ -108,7 +108,7 @@ class Twfyuser(models.Model):
         db_table = u'users'
 	verbose_name = "TWFY User"
     def __unicode__(self):
-        return str(self.user_id) + " " + self.firstname + " " + self.lastname
+        return unicode(self.user_id) + " " + self.firstname + " " + self.lastname
 	
 class ApiKey(models.Model):
     id = models.IntegerField(primary_key=True)
@@ -156,7 +156,6 @@ class Hansard(models.Model):
     hpos = models.IntegerField()
     hdate = models.DateField()
     htime = models.TimeField(blank=True)
-    body = models.TextField()
     source_url = models.CharField(max_length=765)
     minor = models.IntegerField(null=True, blank=True, choices=MINOR)
     created = models.DateTimeField(null=True, blank=True)
@@ -164,15 +163,14 @@ class Hansard(models.Model):
     colnum = models.IntegerField(null=True, blank=True)
     video_status = models.IntegerField()
     class Meta:
-        db_table = u'hansardplus'
+        db_table = u'hansard'
     def __unicode__(self):
-        return str(self.gid)
+        return unicode(self.gid)
 
 
-"""
 class Epobject(Hansard):
-    epobject_id = models.OneToOneField('Hansard',primary_key=True)
-    title = models.CharField(max_length=765, blank=True)
+    epobject_id = models.OneToOneField('Hansard',db_column='epobject_id',primary_key=True)
+    raw_id_fields = ("epobject_id",)
     body = models.TextField(blank=True)
     type = models.IntegerField(null=True, blank=True)
     #created = models.DateTimeField(null=True, blank=True)
@@ -180,8 +178,8 @@ class Epobject(Hansard):
     class Meta:
         db_table = u'epobject'
     def __unicode__(self):
-        return str(self.id)
-
+        return unicode(self.id)
+"""
 
 class Editqueue(models.Model):
     edit_id = models.IntegerField(primary_key=True)
