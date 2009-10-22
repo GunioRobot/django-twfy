@@ -3,11 +3,11 @@ from parliament.models import Member
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
-from django-twfy.parliament import views
+from parliament import views
 
 admin.autodiscover()
 
-members_dict = { 'queryset': Member.objects.all(), }
+members_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office").order_by("last_name"), }
 
 
 
@@ -24,4 +24,6 @@ urlpatterns = patterns('',
     
     
     (r'^members/$', 'django.views.generic.list_detail.object_list', members_dict),
+    (r'^members/(?P<member_id>\d+)/$', 'parliament.views.memberdetail'),
+
 )
