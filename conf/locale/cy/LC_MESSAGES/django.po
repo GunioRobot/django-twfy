@@ -1,0 +1,177 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-22 22:36+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settings.py:80
+msgid "English"
+msgstr ""
+
+#: settings.py:81
+msgid "Irish"
+msgstr ""
+
+#: parliament/models.py:14
+msgid "No"
+msgstr ""
+
+#: parliament/models.py:15
+msgid "Yes"
+msgstr ""
+
+#: parliament/models.py:23
+msgid "Dail"
+msgstr ""
+
+#: parliament/models.py:24
+msgid "Seanad"
+msgstr ""
+
+#: parliament/models.py:28 parliament/models.py:43
+msgid "Unknown"
+msgstr ""
+
+#: parliament/models.py:29 parliament/models.py:45
+msgid "General Election"
+msgstr ""
+
+#: parliament/models.py:30
+msgid "By-election"
+msgstr ""
+
+#: parliament/models.py:31 parliament/models.py:48
+msgid "Changed party"
+msgstr ""
+
+#: parliament/models.py:32
+msgid "Reinstated"
+msgstr ""
+
+#: parliament/models.py:33
+msgid "Appointed"
+msgstr ""
+
+#: parliament/models.py:34 parliament/models.py:54
+msgid "Devolution"
+msgstr ""
+
+#: parliament/models.py:35
+msgid "Election"
+msgstr ""
+
+#: parliament/models.py:36
+msgid "Accession"
+msgstr ""
+
+#: parliament/models.py:37 parliament/models.py:57
+msgid "Regional Election"
+msgstr ""
+
+#: parliament/models.py:38
+msgid "Replaced in Region"
+msgstr ""
+
+#: parliament/models.py:39 parliament/models.py:58
+msgid "Became Presiding Officer"
+msgstr ""
+
+#: parliament/models.py:44
+msgid "Still in Office"
+msgstr ""
+
+#: parliament/models.py:46
+msgid "General Election (standing)"
+msgstr ""
+
+#: parliament/models.py:47
+msgid "General Election (not standing)"
+msgstr ""
+
+#: parliament/models.py:49
+msgid "Died"
+msgstr ""
+
+#: parliament/models.py:50
+msgid "Declared Void"
+msgstr ""
+
+#: parliament/models.py:51
+msgid "Resigned"
+msgstr ""
+
+#: parliament/models.py:52
+msgid "Disqualified"
+msgstr ""
+
+#: parliament/models.py:53
+msgid "Became Peer"
+msgstr ""
+
+#: parliament/models.py:55
+msgid "Dissolution"
+msgstr ""
+
+#: parliament/models.py:56
+msgid "Retired"
+msgstr ""
+
+#: parliament/models.py:65
+msgid "Section title"
+msgstr ""
+
+#: parliament/models.py:66
+msgid "Subsection title"
+msgstr ""
+
+#: parliament/models.py:67
+msgid "Speech"
+msgstr ""
+
+#: parliament/models.py:68
+msgid "Procedural text"
+msgstr ""
+
+#: parliament/models.py:72
+msgid "Debates"
+msgstr ""
+
+#: parliament/models.py:73
+msgid "Written Answers"
+msgstr ""
+
+#: parliament/models.py:74
+msgid "Seanad Debates"
+msgstr ""
+
+#: parliament/models.py:78
+msgid "Question"
+msgstr ""
+
+#: parliament/models.py:79
+msgid "Answer"
+msgstr ""
+
+#: parliament/models.py:92
+msgid "Email Alert"
+msgstr ""
+
+#: parliament/models.py:117
+msgid "TWFY User"
+msgstr ""
+
+#: parliament/models.py:175
+msgid "Hansard object"
+msgstr ""

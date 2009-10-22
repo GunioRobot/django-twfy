@@ -25,7 +25,7 @@ TIME_ZONE = 'Europe/Dublin'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-ie'
+#LANGUAGE_CODE = 'en-ie'
 
 SITE_ID = 1
 
@@ -61,6 +61,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 )
 
 ROOT_URLCONF = 'django-twfy.urls'
@@ -71,6 +72,15 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     '/home/johnh/Desktop/kforge/svn/trunk/django-twfy/templates',
 )
+
+# This line is in place of 'import gettext' since that imports this very file (bad)
+_ = lambda s: s 
+
+LANGUAGES = (
+    ('en', _('English')),
+    ('ga-ie', _('Irish')),
+)
+
 
 INSTALLED_APPS = (
     'django.contrib.admin',
