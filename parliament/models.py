@@ -164,6 +164,8 @@ class Hansard(models.Model):
     video_status = models.IntegerField()
     class Meta:
         db_table = u'hansard'
+	verbose_name = "Hansard object"
+
     def __unicode__(self):
         return unicode(self.gid)
 
