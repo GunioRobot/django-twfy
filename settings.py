@@ -77,8 +77,11 @@ TEMPLATE_DIRS = (
 _ = lambda s: s 
 
 LANGUAGES = (
+    ('cy', _('Welsh')),
     ('en', _('English')),
     ('ga-ie', _('Irish')),
+    ('ga-gb', _('Scots Gaelic')),
+    ('et-ee', _('Estonian')),
 )
 
 
