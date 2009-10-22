@@ -3,6 +3,7 @@ from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Epobject
 
 class EpobjectInline(admin.TabularInline):
         model = Epobject
+        exclude = ('htype','speaker_id','major','minor','section_id','subsection_id','hpos','hdate','htime','source_url','created','modified','colnum','video_status','type',)
 
 class MemberAdmin(admin.ModelAdmin):
         list_display = ('__unicode__','party','constituency','entered_house','entered_reason','left_house')
