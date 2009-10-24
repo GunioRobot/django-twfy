@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Debates for {{ day }}  | django-twfy{% endblock %}
+
+{% block content %}
+
+<h1>Dáil Debates - {{ day }}</h1>
+
+{% if object_list %}
+<ul>
+    {% for debate in object_list %}
+        <li>{{ debate.epobject.body }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No members are listed.</p>
+{% endif %}
+
+
+{% endblock %}
+
