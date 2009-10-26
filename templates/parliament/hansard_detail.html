@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Hansard object with ID {{ parent.id }}  | django-twfy{% endblock %}
+
+{% block content %}
+
+{% ifequal parent.major 1 %}
+    <h2>Dáil Debates</h2>
+{% endifequal %}
+
+{% ifequal parent.major 3 %}
+    <h2>Written Answers</h2>
+{% endifequal %}
+
+{% ifequal parent.major 7 %}
+    <h2>Seanad Debates</h2>
+{% endifequal %}
+
+<h3>{{ parent.hdate|date:"l, F jS Y" }}</h3>
+
+
+
+{% for hansard in hansards %}
+        {% ifequal hansard.htype 11 %}
+            <h4>{{ hansard.epobject.body }}</h4>
+        {% endifequal %}
+        
+	{% ifnotequal hansard.htype 10 %}
+        {% ifnotequal hansard.htype 11 %}
+            <div class="main">
+            <a name=""></a>
+            <p class="speaker"><a href="/member/{{ hansard.speaker_id.person_id }}" title="See more information about {{ hansard.speaker_id.first_name }} {{ hansard.speaker_id.last_name }}"><img src="http://www.kildarestreet.com/images/mps/{{ hansard.speaker_id.person_id }}.jpg" class="portrait" alt="Photo of {{ hansard.speaker_id.first_name }} {{ hansard.speaker_id.last_name }}"><strong>{{ hansard.speaker_id.first_name }} {{ hansard.speaker_id.last_name }}</strong></a> <small>({{ hansard.speaker_id.party }}, {{ hansard.speaker_id.constituency }})</small></p>
+            <p>{{ hansard.epobject.body|safe }}</p>
+            </div>
+        {% endifnotequal %}
+        {% endifnotequal %}
+{% endfor %}
+
+{% endblock %}
+
+
+<div class="stripe-2" id="g1272.0.q">
+			<div class="main">
+<a name="g1272.0.q"></a><p class="speaker"><a href="/td/?m=767" title="See more information about Ruairi Quinn"><img src="/images/mps/238.jpg" class="portrait" alt="Photo of Ruairi Quinn"><strong>Ruairi Quinn</strong></a> <small>(Dublin South East, Labour)</small><p pid="1272.0.q"><i>Question 223:</i> To ask the Minister for Education and Science  his proposals to ensure that his Department is capable of quickly and efficiently drafting legislation to put before the Houses of the Oireachtas; if his attention has been drawn to the lack of progress with the Student Support Bill 2008, the proposed Education (Patronage) Bill, the proposed George Mitchell Scholarship Fund Act 1998 (Amendment) Bill and the proposed Qualifications (Education and Training) Bill; and if he will make a statement on the matter.  <b>[27285/09]</b></p>			</div> <!-- end .main -->
+
+			<div class="sidebar">
+			</div> <!-- end .sidebar -->
+			<div class="break"></div>
+		</div> 

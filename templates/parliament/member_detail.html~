@@ -5,8 +5,8 @@
 
 {% block content %}
 
-<h2>{{ member.first_name }} {{ member.last_name }}</h2>
-<h3>{% ifequal member.house 1 %}Dáil{% endifequal %}{% ifequal member.house 4 %}Seanad{% endifequal %}</h3>
+<h1>{{ member.first_name }} {{ member.last_name }}</h1>
+<h2>{% ifequal member.house 1 %}Dáil{% endifequal %}{% ifequal member.house 4 %}Seanad{% endifequal %}</h2>
 
 <p><img src="http://www.kildarestreet.com/images/mpsL/{{ member.person_id }}.jpg" /></p>
 {% endblock %}

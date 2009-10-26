@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Debates for {{ year }}  | django-twfy{% endblock %}
+
+{% block content %}
+
+<h2>Dáil Debates</h2>
+<h3>Debates for {{ year }}</h2>
+
+{% if date_list %}
+<ul>
+    {% for date in date_list %}
+        <li><a href="/debates/{{ year }}/{{ date|date:"m" }}/">{{ date|date:"F" }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No dates are listed.</p>
+{% endif %}
+
+
+{% endblock %}
+

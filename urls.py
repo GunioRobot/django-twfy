@@ -8,9 +8,8 @@ from parliament import views
 admin.autodiscover()
 
 members_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office").order_by("last_name"), }
-debates_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate", }
-
-
+debates_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate",}
+debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m"}
 
 urlpatterns = patterns('',
     # Example:
@@ -27,10 +26,12 @@ urlpatterns = patterns('',
     (r'^members/$', 'django.views.generic.list_detail.object_list', members_dict),
     (r'^members/(?P<member_id>\d+)/$', 'parliament.views.memberdetail'),
     
-    #
-    #  This one shows a debate index for Major type=1 at (eg) debates/2009/jul/02
-    #
-    
-    (r'^debates/(?P<year>\d{4})/(?P<month>[a-z]{3})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', debates_dict),
+    #  This one shows a debate index for Major type=1 at (eg) debates/2009/07/02
+    (r'^debates/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', debates_month_dict),
+
+
+    (r'^debates/(?P<year>\d{4})/(?P<month>\d{2})/$', 'django.views.generic.date_based.archive_month', debates_month_dict),
+    (r'^debates/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', debates_dict),
+    (r'^debates/(?P<epobject_id>\d+)/$', 'parliament.views.hansarddetail'),
 
 )

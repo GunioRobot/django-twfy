@@ -4,8 +4,7 @@
 
 {% block content %}
 
-<h2>Dáil Éireann</h2>
-<h3>All members</h3>
+<h1>All members</h1>
 
 {% if object_list %}
     <table>

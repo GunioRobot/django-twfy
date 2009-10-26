@@ -4,8 +4,7 @@
 
 {% block content %}
 
-<h2>Dáil Debates</h2>
-<h3>{{ day|date:"l F jS, Y" }}</h3>
+<h1>Dáil Debates - {{ day|date:"l F jS, Y" }}</h1>
 
 {% if object_list %}
 <ul>

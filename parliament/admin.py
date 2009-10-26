@@ -1,5 +1,5 @@
 from django.contrib import admin
-from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Epobject, Moffice
+from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject
 
 class EpobjectInline(admin.TabularInline):
         model = Epobject

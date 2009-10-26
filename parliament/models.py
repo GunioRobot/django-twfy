@@ -187,7 +187,7 @@ class Hansard(models.Model):
         return unicode(self.gid)
 
 class Epobject(Hansard):
-    epobject_id = models.OneToOneField('Hansard',db_column='epobject_id',primary_key=True)
+    epobject_id = models.OneToOneField('Hansard',db_column='epobject_id')
     raw_id_fields = ("epobject_id",)
     body = models.TextField(blank=True)
     type = models.IntegerField(null=True, blank=True)
