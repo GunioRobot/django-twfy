@@ -226,6 +226,19 @@ class Indexbatch(models.Model):
     def __unicode__(self):
         return unicode(self.indexbatch_id)
 
+class SearchQueryLog(models.Model):
+    id = models.IntegerField(primary_key=True)
+    query_string = models.TextField(blank=True)
+    page_number = models.IntegerField(null=True, blank=True)
+    count_hits = models.IntegerField(null=True, blank=True)
+    ip_address = models.TextField(blank=True)
+    query_time = models.DateTimeField(null=True, blank=True)
+    class Meta:
+        db_table = u'search_query_log'
+	verbose_name = _("Search query")
+	verbose_name_plural = _("Search queries")
+
+
 """
 class Gidredirect(models.Model):
     gid_from = models.ForeignKey('Epobject',db_column="gid_from",unique=True)
@@ -318,16 +331,6 @@ class PostcodeLookup(models.Model):
     name = models.CharField(max_length=300)
     class Meta:
         db_table = u'postcode_lookup'
-
-class SearchQueryLog(models.Model):
-    id = models.IntegerField(primary_key=True)
-    query_string = models.TextField(blank=True)
-    page_number = models.IntegerField(null=True, blank=True)
-    count_hits = models.IntegerField(null=True, blank=True)
-    ip_address = models.TextField(blank=True)
-    query_time = models.DateTimeField(null=True, blank=True)
-    class Meta:
-        db_table = u'search_query_log'
 
 class Titles(models.Model):
     title = models.CharField(max_length=570, primary_key=True)

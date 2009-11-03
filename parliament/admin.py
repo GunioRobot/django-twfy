@@ -1,5 +1,5 @@
 from django.contrib import admin
-from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject, Anonvotes, Indexbatch, Uservotes
+from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject, Anonvotes, Indexbatch, Uservotes, SearchQueryLog
 
 class EpobjectInline(admin.TabularInline):
         model = Epobject
@@ -33,6 +33,11 @@ class HansardAdmin(admin.ModelAdmin):
 
 class IndexbatchAdmin(admin.ModelAdmin):
 	list_display = ('indexbatch_id','created',)
+	
+class SearchQueryLogAdmin(admin.ModelAdmin):
+        list_display = ('query_time','query_string','count_hits',)
+        ordering = ('-query_time',)
+	list_filter = ('count_hits',)
 
 admin.site.register(Alert,AlertAdmin)
 admin.site.register(Twfyuser)
@@ -40,3 +45,4 @@ admin.site.register(ApiKey)
 admin.site.register(Indexbatch,IndexbatchAdmin)
 admin.site.register(Hansard,HansardAdmin)
 admin.site.register(Member,MemberAdmin)
+admin.site.register(SearchQueryLog,SearchQueryLogAdmin)
