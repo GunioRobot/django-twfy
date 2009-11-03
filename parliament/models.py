@@ -195,8 +195,47 @@ class Epobject(Hansard):
         db_table = u'epobject'
     def __unicode__(self):
         return unicode(self.id)
-        
+
+class Anonvotes(models.Model):
+    epobject_id = models.OneToOneField('Hansard',db_column='epobject_id',primary_key=True)
+    yes_votes = models.IntegerField()
+    no_votes = models.IntegerField()
+    class Meta:
+        db_table = u'anonvotes'
+	verbose_name = _("Anonymous vote")
+    def __unicode__(self):
+        return unicode(self.epobject_id)
+
+class Uservotes(models.Model):
+    user_id = models.ForeignKey('Twfyuser',db_column='user_id')
+    epobject_id = models.ForeignKey('Hansard',db_column="epobject_id")
+    vote = models.IntegerField()
+    class Meta:
+        db_table = u'uservotes'
+	verbose_name = _("User vote")
+    def __unicode__(self):
+        return unicode(self.epobject_id)
+
+class Indexbatch(models.Model):
+    indexbatch_id = models.IntegerField(primary_key=True)
+    created = models.DateTimeField(null=True, blank=True)
+    class Meta:
+        db_table = u'indexbatch'
+	verbose_name = _("Index batch")
+	verbose_name_plural = _("Index batches")
+    def __unicode__(self):
+        return unicode(self.indexbatch_id)
+
 """
+class Gidredirect(models.Model):
+    gid_from = models.ForeignKey('Epobject',db_column="gid_from",unique=True)
+    gid_to = models.ForeignKey('Epobject',db_column="gid_to",blank=True)
+    hdate = models.DateField()
+    major = models.IntegerField(choices=MAJOR)
+    class Meta:
+        db_table = u'gidredirect'
+
+
 class Editqueue(models.Model):
     edit_id = models.IntegerField(primary_key=True)
     user_id = models.IntegerField(null=True, blank=True)
@@ -216,14 +255,6 @@ class Editqueue(models.Model):
     class Meta:
         db_table = u'editqueue'
 
-
-class Anonvotes(models.Model):
-    epobject_id = models.IntegerField(primary_key=True)
-    yes_votes = models.IntegerField()
-    no_votes = models.IntegerField()
-    class Meta:
-        db_table = u'anonvotes'
-
 class Expenses(models.Model):
     id = models.IntegerField(primary_key=True)
     year = models.IntegerField()
@@ -233,14 +264,6 @@ class Expenses(models.Model):
     content = models.CharField(max_length=768, blank=True)
     class Meta:
         db_table = u'expenses'
-
-class Gidredirect(models.Model):
-    gid_from = models.CharField(unique=True, max_length=180, blank=True)
-    gid_to = models.CharField(max_length=180, blank=True)
-    hdate = models.DateField()
-    major = models.IntegerField(null=True, blank=True)
-    class Meta:
-        db_table = u'gidredirect'
 
 class Glossary(models.Model):
     glossary_id = models.IntegerField(primary_key=True)
@@ -253,30 +276,6 @@ class Glossary(models.Model):
     visible = models.IntegerField(null=True, blank=True)
     class Meta:
         db_table = u'glossary'
-
-class Indexbatch(models.Model):
-    indexbatch_id = models.IntegerField(primary_key=True)
-    created = models.DateTimeField(null=True, blank=True)
-    class Meta:
-        db_table = u'indexbatch'
-
-class Member(models.Model):
-    member_id = models.IntegerField(primary_key=True)
-    house = models.IntegerField(null=True, blank=True)
-    first_name = models.CharField(unique=True, max_length=300, blank=True)
-    last_name = models.CharField(unique=True, max_length=765)
-    constituency = models.CharField(max_length=300)
-    party = models.CharField(max_length=300)
-    entered_house = models.DateField(unique=True)
-    left_house = models.DateField()
-    entered_reason = models.CharField(max_length=72)
-    left_reason = models.CharField(max_length=87)
-    person_id = models.IntegerField()
-    oir_personid = models.CharField(max_length=120, blank=True)
-    title = models.CharField(max_length=150)
-    lastupdate = models.DateTimeField()
-    class Meta:
-        db_table = u'member'
 
 class Memberinfo(models.Model):
     member_id = models.IntegerField()
@@ -347,13 +346,6 @@ class Trackbacks(models.Model):
     source_ip = models.CharField(max_length=60, blank=True)
     class Meta:
         db_table = u'trackbacks'
-
-class Uservotes(models.Model):
-    user_id = models.IntegerField()
-    epobject_id = models.IntegerField()
-    vote = models.IntegerField()
-    class Meta:
-        db_table = u'uservotes'
 
 class VideoTimestamps(models.Model):
     id = models.IntegerField(primary_key=True)

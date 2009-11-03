@@ -1,9 +1,12 @@
 from django.contrib import admin
-from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject
+from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject, Anonvotes, Indexbatch, Uservotes
 
 class EpobjectInline(admin.TabularInline):
         model = Epobject
         exclude = ('htype','speaker_id','major','minor','section_id','subsection_id','hpos','hdate','htime','source_url','created','modified','colnum','video_status','type',)
+
+class AnonvotesInline(admin.TabularInline):
+	model = Anonvotes
 
 class MofficeInline(admin.TabularInline):
         model = Moffice
@@ -25,11 +28,15 @@ class AlertAdmin(admin.ModelAdmin):
 
 class HansardAdmin(admin.ModelAdmin):
         inlines = [
-                EpobjectInline,
+                EpobjectInline,AnonvotesInline
         ]
-        
+
+class IndexbatchAdmin(admin.ModelAdmin):
+	list_display = ('indexbatch_id','created',)
+
 admin.site.register(Alert,AlertAdmin)
 admin.site.register(Twfyuser)
 admin.site.register(ApiKey)
+admin.site.register(Indexbatch,IndexbatchAdmin)
 admin.site.register(Hansard,HansardAdmin)
 admin.site.register(Member,MemberAdmin)
