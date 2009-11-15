@@ -2,15 +2,102 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-	<meta http-equiv="Content-Language" content="en-ie" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>{% block title %}django-twfy{% endblock %}</title>
+	<meta name="description" content="Making politics easy.">
+	<meta name="keywords" content="Parliament, Ireland, Dublin, Kildare Street, TD, TDs, Senator, Senators, Debates, Parliamentary Record, Hansard, Dail, D&aacute;il, Seanad, Oireachtas, Eireann, &Eacute;ireann, The Northern Ireland Assembly">
+		<link rel="author" title="Send feedback" href="mailto:team&#64;kildarestreet.com">
+	<link rel="home" title="Home" href="http://www.kildarestreet.com/">
+	<script type="text/javascript" src="http://www.kildarestreet.com/js/main.js"></script>
+
+	<link rel="start" title="Home" href="/">
+	<link rel="stylesheet" href="http://www.kildarestreet.com/style/default/global.css" type="text/css">
+	<style type="text/css">
+		@import url("http://www.kildarestreet.com/style/default/global_non_ns4.css");
+	</style>
+	<link rel="stylesheet" href="http://www.kildarestreet.com/jslib/share/share.css" type="text/css" media="screen">
 	{% block extraheadcontent %}{% endblock %}
+	
 </head>
 <body{% block bodyparams %}{% endblock %}>
 
-    {% block content %}{% endblock %}
+<div id="container">
+	<a name="top"></a>
 
+	<div id="banner">
+		<div id="title">
+			<h1><a href="/" title="To the front page of the site"><img src="http://www.kildarestreet.com/images/kildarestreetcom.gif" width="293" height="28" alt="KildareStreet.com"></a></h1>
+		</div>
+		<div id="search">
+			<form action="/search/" method="get">
+			<p>Search <input name="s" size="15"> <input type="submit" class="submit" value="GO"></p>
 
+			</form>
+		</div>
+	</div> <!-- end #banner -->
+	<div id="menu">
+		<div id="topmenu">
+			<ul id="user">
+			<li><a href="/user/logout/?ret=%2Fni%2F" title="Log out">Log out</a></li>
+			<li><a href="/user/" title="View and edit your details">Your details</a></li>
+
+			<li><span class="name">John Handelaar</span></li>
+<!--			<li><a href="/getinvolved/?pg=getinvolved" title="Contribute to KildareStreet">Get involved</a></li> -->
+			</ul>
+			<ul id="site">
+			<li><a href="/" title="The front page of the site">Home</a></li>
+			<li><a href="/dail/" title="D&aacute;il &Eacute;ireann">D&aacute;il</a></li>
+			<li><a href="/seanad/" title="Seanad &Eacute;ireann">Seanad</a></li>
+
+			<li><a href="/ni/" title="Debates of the Northern Ireland Assembly" class="on">Northern Ireland</a></li>
+			<li><a href="/addterm/" title="Add a definition for a term to the glossary">Add a term</a></li>
+			<li><a href="/help/" title="Answers to your questions">Help</a></li>
+			</ul>
+			<br>
+		</div>
+		<div id="bottommenu">
+
+			<ul>
+			<li></li>
+			</ul>
+		</div>
+	</div> <!-- end #menu -->
+	
+	<div id="content">
+
+		<div class="stripe-side">
+			<div class="main">
+
+			{% block content %}{% endblock %}
+
+			</div> <!-- end .main -->
+			<div class="sidebar">
+			{% block sidebar %}
+			
+			&nbsp;
+			{% endblock %}
+			</div> <!-- end .sidebar -->
+			<div class="break"></div>
+		</div> <!-- end .stripe-* -->
+		
+	
+		<div id="footer">
+			<p><a href="/about/">About us</a> &nbsp;&nbsp;&nbsp; <a href="/contact/">Contact Us</a> &nbsp;&nbsp;&nbsp; <a href="/houserules/">House rules</a> &nbsp;&nbsp;&nbsp; <a href="/source/">Source code</a> &nbsp;&nbsp;&nbsp; <a href="http://mycroft.mozdev.org/download.html?name=kildarestreet">Add search to your web browser</a></p>
+
+			
+		</div>
+
+	</div> <!-- end #content -->
+</div> <!-- end #container -->
+
+<!-- <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-8260784-1");
+pageTracker._trackPageview();
+} catch(err) {}</script> -->
 </body>
 </html>

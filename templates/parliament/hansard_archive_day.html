@@ -1,22 +1,22 @@
 {% extends "base.html" %}
+{% load rendercalendar %}
 
 {% block title %}Debates for {{ day|date:"l F jS, Y" }}  | django-twfy{% endblock %}
 
 {% block content %}
-
-<h2>Dáil Debates</h2>
-<h3>{{ day|date:"l F jS, Y" }}</h3>
-
-{% if object_list %}
-<ul>
-    {% for debate in object_list %}
-        <li><a href="/debates/{{ debate.id }}">{{ debate.epobject.body }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-    <p>No debates are listed.</p>
-{% endif %}
-
-
+	<h2>Dáil Debates</h2>
+	<h3>{{ day|date:"l F jS, Y" }}</h3>
+	{% if object_list %}
+		<ul>
+		{% for debate in object_list %}
+			<li><a href="/debates/{{ debate.id }}">{{ debate.epobject.body }}</a></li>
+		{% endfor %}
+	</ul>
+	{% else %}
+		<p>No debates are listed.</p>
+	{% endif %}
 {% endblock %}
 
+{% block sidebar %}
+	
+{% endblock %}

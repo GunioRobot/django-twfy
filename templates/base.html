@@ -49,7 +49,7 @@
 			<li><a href="/dail/" title="D&aacute;il &Eacute;ireann">D&aacute;il</a></li>
 			<li><a href="/seanad/" title="Seanad &Eacute;ireann">Seanad</a></li>
 
-			<li><a href="/ni/" title="Debates of the Northern Ireland Assembly" class="on">Northern Ireland</a></li>
+			<li><a href="/ni/" title="Debates of the Northern Ireland Assembly">Northern Ireland</a></li>
 			<li><a href="/addterm/" title="Add a definition for a term to the glossary">Add a term</a></li>
 			<li><a href="/help/" title="Answers to your questions">Help</a></li>
 			</ul>
@@ -71,9 +71,11 @@
 			{% block content %}{% endblock %}
 
 			</div> <!-- end .main -->
-
 			<div class="sidebar">
+			{% block sidebar %}
+			
 			&nbsp;
+			{% endblock %}
 			</div> <!-- end .sidebar -->
 			<div class="break"></div>
 		</div> <!-- end .stripe-* -->

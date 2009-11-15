@@ -7,9 +7,10 @@ from parliament import views
 
 admin.autodiscover()
 
+
 members_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office").order_by("last_name"), }
 debates_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate",}
-debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m"}
+debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct()} }
 
 urlpatterns = patterns('',
     # Example:
@@ -22,7 +23,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
     
-    
+    (r'^$', 'parliament.views.index'),
     (r'^members/$', 'django.views.generic.list_detail.object_list', members_dict),
     (r'^members/(?P<member_id>\d+)/$', 'parliament.views.memberdetail'),
     
@@ -33,5 +34,7 @@ urlpatterns = patterns('',
     (r'^debates/(?P<year>\d{4})/(?P<month>\d{2})/$', 'django.views.generic.date_based.archive_month', debates_month_dict),
     (r'^debates/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', debates_dict),
     (r'^debates/(?P<epobject_id>\d+)/$', 'parliament.views.hansarddetail'),
+    
+
 
 )

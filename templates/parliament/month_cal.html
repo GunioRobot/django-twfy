@@ -1,0 +1,14 @@
+
+<tr>
+{% for day in headers %}
+<th>{{ day|date:"D"|slice:":3" }}</hd>
+{% endfor %}
+</tr>
+{% for week in calendar %}
+<tr>
+{% for day in week %}
+<td>{% if day.event %}<a href="/debates/{{ day.day|date:"Y/m" }}/{{ day.day|date:"j" }}/">{{ day.day|date:"j" }}</a>{% else %}{% if day.in_month %}{{ day.day|date:"j" }}{% endif %}{% endif %}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+

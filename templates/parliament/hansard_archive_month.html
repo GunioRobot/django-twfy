@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-
+{% load rendercalendar %}
 {% block title %}Debates for {{ year }}  | django-twfy{% endblock %}
+
+{% block sidebar %}
+	{% monthcal 2009 02 %}
+{% endblock %}
 
 {% block content %}
 

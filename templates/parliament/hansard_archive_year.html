@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load rendercalendar %}
 {% block title %}Debates for {{ year }}  | django-twfy{% endblock %}
 
 {% block content %}
@@ -8,15 +8,82 @@
 <h3>Debates for {{ year }}</h2>
 
 {% if date_list %}
-<ul>
-    {% for date in date_list %}
-        <li><a href="/debates/{{ year }}/{{ date|date:"m" }}/">{{ date|date:"F" }}</a></li>
-    {% endfor %}
-</ul>
+	<div class="calendar">
+		<table border="0">
+		<caption>January {{ year }}</caption>
+		{% monthcal year 01 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>February {{ year }}</caption>
+		{% monthcal year 02 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>March {{ year }}</caption>
+		{% monthcal year 03 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>April {{ year }}</caption>
+		{% monthcal year 04 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>May {{ year }}</caption>
+		{% monthcal year 05 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>June {{ year }}</caption>
+		{% monthcal year 06 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>July {{ year }}</caption>
+		{% monthcal year 07 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>August {{ year }}</caption>
+		{% monthcal year 08 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>September {{ year }}</caption>
+		{% monthcal year 09 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>October {{ year }}</caption>
+		{% monthcal year 10 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>November {{ year }}</caption>
+		{% monthcal year 11 %}
+		</table>
+	</div>
+	<div class="calendar">
+		<table border="0">
+		<caption>December {{ year }}</caption>
+		{% monthcal year 12 %}
+		</table>
+	</div>
+
 {% else %}
     <p>No dates are listed.</p>
 {% endif %}
 
 
 {% endblock %}
-

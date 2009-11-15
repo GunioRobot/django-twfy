@@ -183,6 +183,9 @@ class Hansard(models.Model):
     class Meta:
         db_table = u'hansard'
 	verbose_name = _("Hansard object")
+    def get_absolute_url(self):
+        return "/debates/%i/" % self.id
+
     def __unicode__(self):
         return unicode(self.gid)
 
