@@ -6,7 +6,7 @@
 {% block content %}
 
 <h2>{{ member.first_name }} {{ member.last_name }}</h2>
-<h3>{% ifequal member.house 1 %}Dáil{% endifequal %}{% ifequal member.house 4 %}Seanad{% endifequal %}</h3>
+<h3>{% ifequal member.house.id 1 %}Dáil{% endifequal %}{% ifequal member.house.id 4 %}Seanad{% endifequal %}</h3>
 
-<p><img src="http://www.kildarestreet.com/images/mpsL/{{ member.person_id }}.jpg" /></p>
+<p><img src="http://www.kildarestreet.com/images/mpsL/{{ member.person_id.id }}.jpg" /></p>
 {% endblock %}

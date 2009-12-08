@@ -12,9 +12,9 @@
     <tr><td></td><td><b>Name</b></td><td><b>House</b></td><td><b>Party</b></td><td><b>Constituency</b></td></tr>
     {% for member in object_list %}
         <tr>
-        <td><img src="http://www.kildarestreet.com/images/mps/{{ member.person_id }}.jpg" /></td>
+        <td><img src="http://www.kildarestreet.com/images/mps/{{ member.person_id.id }}.jpg" /></td>
         <td><a href="/members/{{ member.id }}">{{ member.first_name }} {{ member.last_name }}</a></td>
-        <td>{% ifequal member.house 1 %}Dáil{% endifequal %}{% ifequal member.house 4 %}Seanad{% endifequal %}</td>
+        <td>{% ifequal member.house.id 1 %}Dáil{% endifequal %}{% ifequal member.house.id 4 %}Seanad{% endifequal %}</td>
         <td>{{ member.party }}</td>
         <td>{{ member.constituency }}</td>
         </tr>
