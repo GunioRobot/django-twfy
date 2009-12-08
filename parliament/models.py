@@ -16,14 +16,6 @@ CONFIRM_STATES = (
 )
 
 
-# Included to make admin output on some things legible.  
-# This one should be ported to a 'chambers' model instead but hasn't been yet
-
-HOUSES_OF_PARLIAMENT = (
-    (1,_('Dail')),
-    (4,_('Seanad')),
-)
-
 ENTER_REASONS = (
     ('unknown',_('Unknown')),
     ('general_election',_('General Election')),
@@ -79,6 +71,22 @@ MINOR = (
     (2,_('Answer')),
 )
 
+class Chamber(models.Model):
+    name = models.CharField(max_length=255)
+    class Meta:
+	verbose_name = _("Chamber")
+    def __unicode__(self):
+        return self.name
+
+class Person(models.Model):
+    name = models.CharField(max_length=512)
+    class Meta:
+	verbose_name = _("Person")
+	verbose_name_plural = _("People")
+    def __unicode__(self):
+        return self.name
+    
+
 class Alert(models.Model):
     alert_id = models.IntegerField(primary_key=True)
     email = models.CharField(max_length=765)
@@ -133,7 +141,7 @@ class ApiKey(models.Model):
 
 class Member(models.Model):
     id = models.IntegerField(primary_key=True,db_column='member_id')
-    house = models.IntegerField(choices=HOUSES_OF_PARLIAMENT)
+    house = models.ForeignKey(Chamber,db_column='house')
     first_name = models.CharField(max_length=300, blank=True)
     last_name = models.CharField(max_length=765)
     constituency = models.CharField(max_length=300)
@@ -142,7 +150,7 @@ class Member(models.Model):
     left_house = models.DateField()
     entered_reason = models.CharField(max_length=72,choices=ENTER_REASONS)
     left_reason = models.CharField(max_length=87,choices=LEFT_REASONS)
-    person_id = models.IntegerField()
+    person_id = models.ForeignKey(Person, db_column='person_id')
     oir_personid = models.CharField(max_length=120, blank=True)
     title = models.CharField(max_length=150, blank=True)
     lastupdate = models.DateTimeField()
@@ -157,7 +165,7 @@ class Moffice(models.Model):
     position = models.CharField(max_length=600)
     from_date = models.DateField()
     to_date = models.DateField()
-    person = models.ForeignKey(Member,db_column='person',to_field='person_id')
+    person = models.ForeignKey(Person,db_column='person')
     source = models.CharField(max_length=765)
     class Meta:
         db_table = u'moffice'
