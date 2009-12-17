@@ -1,12 +1,127 @@
 {% extends "base.html" %}
-
+{% load humanize %}
+{% load expenses %}
 {% block title %}{{ member.first_name }} {{ member.last_name }} | django-twfy{% endblock %}
 
 
 {% block content %}
 
-<h2>{{ member.first_name }} {{ member.last_name }}</h2>
-<h3>{% ifequal member.house.id 1 %}Dáil{% endifequal %}{% ifequal member.house.id 4 %}Seanad{% endifequal %}</h3>
+<p class="printonly">This data was produced from a variety of sources.</p>
 
-<p><img src="http://www.kildarestreet.com/images/mpsL/{{ member.person_id.id }}.jpg" /></p>
+<div class="block" id="mp">
+        <h4><a href="/rss/mp/{{ member.person_id.id }}.rdf"><img src="http://kildarestreet.com/images/rss.gif" alt="RSS feed" border="0" align="right"></a>{% ifequal member.left_reason "still_in_office" %}{% ifequal member.house.id 4 %}Senator {% endifequal %}{% endifequal %}{{ member.first_name }} {{ member.last_name }}{% ifequal member.left_reason "still_in_office" %}{% ifequal member.house.id 1 %} TD{% endifequal %}{% endifequal %}</h4>
+	<div class="blockbody">
+                <img class="portrait" alt="Photo of {{ member.first_name }} {{ member.last_name }}" src="http://www.kildarestreet.com/images/mpsL/{{ member.person_id.id }}.jpg">
+                <ul class="hilites">
+                        <li><strong>{% ifnotequal member.left_reason "still_in_office" %}Former {% endifnotequal %}{{ member.get_party_display }} TD for {{ member.constituency }}</strong></li>
+			{% ifnotequal member.left_reason "still_in_office" %}<li><strong>Left Parliament on {{ member.left_house|date:"F jS Y" }}</strong> — {{ member.get_left_reason_display }}</li>{% endifnotequal %}
+                        <!--<li>Changed party from Ceann Comhairle on 13 Oct 2009</li>
+                        <li><a href="/alert/?only=1&amp;pid=217"><strong>Email me whenever John O'Donoghue speaks</strong></a> (no more than once per day)</li> -->
+                </ul>
+                <ul class="jumpers">
+                        <!-- <li><a href="#votingrecord">Voting record</a></li> -->
+                        <!-- <li><a href="#topics">Committees and topics of interest</a></li> -->
+                        <li><a href="#expenses">Expenses</a></li>
+                        <!-- <li><a href="#numbers">Numerology</a></li> -->
+                </ul>
+        </div>
+</div>	
+
+{% comment %}
+<a name="votingrecord"></a>
+<div class="block" id="votingrecord">
+        <h4>Voting record</h4>
+	<div class="blockbody">
+                <p>No data to display yet.</p>
+        </div>
+</div>	
+{% endcomment %}
+
+{% comment %}
+<a name="topics"></a>
+<div class="block" id="topics">
+        <h4>Committees and topics of interest</h4>
+	<div class="blockbody">
+                <p><em>This TD is not currently on any committee and has had no written questions answered for which we know the department or subject.</em></p>
+        </div>
+</div>
+{% endcomment %}
+
+{% comment %}
+<a name="hansard"></a>
+<div class="block" id="hansard">
+        <h4><a href="/rss/mp/217.rdf"><img src="/images/rss.gif" alt="RSS feed" border="0" align="right"></a> Most recent appearances in parliament</h4>
+	<div class="blockbody">
+                <dl id="searchresults">
+                        <dt><a href="/wrans/?id=2009-12-09.1632.0&amp;s=speaker%3A217#g1633.0.q"><strong>Written Answers &#8212; Water and Sewerage Schemes: Water and Sewerage Schemes</strong></a> <small>(9 Dec 2009)</small></dt>
+                        <dd><p>&#8220;Question 202: To ask the Minister for the Environment, Heritage and Local Government  if funding will be made available in 2010 for the provision of a new sewage scheme (details supplied) in County Kerry.  [46077/09]&#8221;</p></dd>
+                        <dt><a href="/wrans/?id=2009-12-09.1632.0&amp;s=speaker%3A217#g1634.0.q"><strong>Written Answers &#8212; Water and Sewerage Schemes: Water and Sewerage Schemes</strong></a> <small>(9 Dec 2009)</small></dt>
+                        <dd><p>&#8220;Question 203: To ask the Minister for the Environment, Heritage and Local Government  if funding will be made available in 2010 for the provision of a new sewage scheme (details supplied) in County Kerry.  [46078/09]&#8221;</p></dd>
+                        <dt><a href="/debates/?id=2009-10-13.2.0&amp;s=speaker%3A217#g3.0"><strong>Statement by An Ceann Comhairle</strong></a> <small>(13 Oct 2009)</small></dt>
+                        <dd><p>&#8220;It is an accepted convention of our political system that the Ceann Comhairle should remain above political controversy.  Implied in that duty is an overriding obligation of fairness among all Members.  It was, therefore, inappropriate for me as Ceann Comhairle to respond publicly to various matters concerning costs incurred while I was Minister for Arts, Sport and Tourism.  For many people...&#8221;</p></dd>
+                </dl>
+                <p id="moreappear"><a href="/search/?pid=217&amp;pop=1#n4">More of John O'Donoghue's recent appearances</a></p>
+                <p class="unneededprintlinks"><a href="/rss/mp/217.rdf" title="XML version of this person's recent appearances">RSS feed</a> (<a href="/help/#rss" title="An explanation of what RSS feeds are for">?</a>)</p>
+	</div>
+</div> 
+{% endcomment %}
+
+{% comment %}
+<a name="expenses"></a>
+<div class="block" id="expenses">
+        <h4>Expenses</h4>
+        <table class="people">
+                <tr><th></th><th style="text-align: center; background-color: #9c9">Pay</th><th colspan="3" style="text-align: center; background-color: #9c9">Personal</th><th colspan="5" style="text-align: center; background-color: #9c9">Constituency-Related</th><th colspan="4" style="text-align: center; background-color: #9c9">Ex-Officio</th><th colspan="2" style="text-align: center; background-color: #9c9">Inter-Parl. Travel</th></tr>
+                <tr><th>Year</th><th>Salary</th><th>Travel &amp; Subsistence</th><th>Mobile Phone</th><th>Misc Exp</th><th>Office</th><th>Grant</th><th>Phones</th><th>Travel</th><th>ISDN</th><th>Allow.</th><th>Secr.</th><th>Travel</th><th>Ents</th><th>BIPA</th><th>Other</th></tr>
+                {% for expenserow in member.person_id.expense_set.all %}
+                <tr class="{% cycle 'row-1' 'row-2' %}">
+                        <td>{{ expenserow.year|date:"Y" }}</td>
+                        <td>€{{ expenserow.salary|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.travel|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.mobile|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.mea|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.office|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.officegrant|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.consphone|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.cta|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.isdn|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.allowance|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.ssa|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.committeetravel|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.cttee_ent|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.bpa|floatformat:2|intcomma }}</td>
+                        <td>€{{ expenserow.ipu|floatformat:2|intcomma }}</td>
+                </tr>
+                {% endfor %}
+        </table>
+</div>
+{% endcomment %}
+
+<a name="expenses"></a>
+<div class="block" id="expenses">
+        <h4>Expenses</h4>
+	{% expenses member.person_id.id %}
+        <p><strong><em>Note:</em></strong> there are some expenses -- most notably ones incurred by Ministers and Ministers of State -- which are charged to and reimbursed by Departments of State and
+           not by the Houses of the Oireachtas.  Those figures are not yet available in sufficient detail to include in this table.</p>
+</div>
+
+
+{% comment %}
+<a name="numbers"></a>
+<div class="block" id="numbers">
+        <h4>Numerology</h4>
+	<div class="blockbody">
+        	<p><em>Please note that numbers do not measure quality. Also, representatives may do other things not currently covered by this site.</em> (<a href="/help/#numbers">More about this</a>)</p>
+                <ul>
+                        <li>Has spoken in <a href="/search/?pid=217&amp;s=section%3Adebates&amp;pop=1"><strong>513 debates</strong></a> in the last year &#8212; well above average among TDs.</li>
+                        <li>Has received answers to <strong>0 written questions</strong> in the last year &#8212; below average among TDs.</li>
+                        <li>People have made <strong>0 comments</strong> on this TD's speeches &#8212; average among TDs.</li>
+                        <li>This TD's speeches, in the printed record, are readable by an average <strong>14&ndash;15</strong> year old, going by the <a href="http://en.wikipedia.org/wiki/Flesch-Kincaid_Readability_Test">Flesch-Kincaid Grade Level</a> score.</li>
+                        <li><strong>4</strong> people are tracking whenever this TD speaks &mdash; <a href="/alert/?only=1&amp;pid=217">email me whenever John O'Donoghue speaks</a>.</li>
+                        <li>Has used three-word alliterative phrases (e.g. "she sells seashells") <strong>705 times</strong> in debates &#8212; well above average among TDs. <small>(<a href="/help/#numbers">Why is this here?</a>)</small></li>
+		</ul>
+	</div>
+</div> 
+{% endcomment %}
+
 {% endblock %}

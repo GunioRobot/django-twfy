@@ -93,5 +93,6 @@ INSTALLED_APPS = (
     'django.contrib.databrowse',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.humanize',
     'django-twfy.parliament',
 )

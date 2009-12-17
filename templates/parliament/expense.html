@@ -1,0 +1,11 @@
+{% load humanize %}
+
+<table class="people">
+	<tr><th>Category</th><th style="text-align: right;">2008</th><th style="text-align: right;">2007</th><th style="text-align: right;">2006</th><th style="text-align: right;">2005</th><th style="text-align: right;">2004</th>
+        <tr><td></td><td style="text-align: right;">€</td><td style="text-align: right;">€</td><td style="text-align: right;">€</td><td style="text-align: right;">€</td><td style="text-align: right;">€</td>
+	{% for row in expenses %}
+	<tr class="{% cycle 'row-1' 'row-2' %}">
+		<td>{% if forloop.last %}<strong>{% endif %}{{ row.0 }}{% if forloop.last %}</strong>{% endif %}</td><td style="text-align:right">{% if forloop.last %}<strong>{% endif %}{{ row.1|floatformat:2|intcomma }}{% if forloop.last %}</strong>{% endif %}</td><td style="text-align:right">{% if forloop.last %}<strong>{% endif %}{{ row.2|floatformat:2|intcomma }}{% if forloop.last %}</strong>{% endif %}</td><td style="text-align:right">{% if forloop.last %}<strong>{% endif %}{{ row.3|floatformat:2|intcomma }}{% if forloop.last %}</strong>{% endif %}</td><td style="text-align:right">{% if forloop.last %}<strong>{% endif %}{{ row.4|floatformat:2|intcomma }}{% if forloop.last %}</strong>{% endif %}</td><td style="text-align:right">{% if forloop.last %}<strong>{% endif %}{{ row.5|floatformat:2|intcomma }}{% if forloop.last %}</strong>{% endif %}</td>
+	</tr>
+	{% endfor %}
+</table>

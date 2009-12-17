@@ -1,5 +1,5 @@
 from django.contrib import admin
-from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject, Anonvotes, Indexbatch, Uservotes, SearchQueryLog, Chamber, Person
+from parliament.models import Alert, Twfyuser, ApiKey, Member, Hansard, Moffice, Epobject, Anonvotes, Indexbatch, Uservotes, SearchQueryLog, Chamber, Person, Expense
 
 class EpobjectInline(admin.TabularInline):
         model = Epobject
@@ -12,6 +12,9 @@ class MofficeInline(admin.TabularInline):
         model = Moffice
         exclude = ('moffice_id',)
         
+class ExpenseInline(admin.TabularInline):
+        model = Expense
+        
 class MemberAdmin(admin.ModelAdmin):
         list_display = ('__unicode__','party','constituency','entered_house','entered_reason','left_house')
         list_filter = ('house','left_reason')
@@ -21,6 +24,7 @@ class PersonAdmin(admin.ModelAdmin):
         ordering = ('name',)
         inlines = [
                 MofficeInline,
+                ExpenseInline,
         ]
 
 class AlertAdmin(admin.ModelAdmin):

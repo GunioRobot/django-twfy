@@ -1,3 +1,5 @@
+# coding=utf8
+
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #     * Rearrange models' order
@@ -14,7 +16,6 @@ CONFIRM_STATES = (
     (0,_('No')),
     (1,_('Yes')),
 )
-
 
 ENTER_REASONS = (
     ('unknown',_('Unknown')),
@@ -48,6 +49,19 @@ LEFT_REASONS = (
     ('retired',_('Retired')),
     ('regional_election',_('Regional Election')),
     ('became_presiding_officer',_('Became Presiding Officer')),
+)
+
+PARTIES = (
+    ('FF',_(u'Fianna Fáil')),
+    ('FG',_(u'Fine Gael')),
+    ('LAB',_(u'Labour Party')),
+    ('GRN',_(u'Green Party')),
+    ('SF',_(u'Sinn Féin')),
+    ('PD',_(u'Progressive Democrats')),
+    ('IND',_(u'Independent')),
+    ('SOC',_(u'Socialist Party')),
+    ('CC',_(u'Ceann Comhairle')),
+    ('IND-FF',_(u'Independent Fianna Fáil')),
 )
 
 # Likewise each of these three lists belongs in Django metamodels but they're
@@ -86,6 +100,26 @@ class Person(models.Model):
     def __unicode__(self):
         return self.name
     
+
+class Expense(models.Model):
+    year = models.DateField()
+    person = models.ForeignKey(Person)
+    salary = models.FloatField()
+    allowance = models.FloatField()
+    cta = models.FloatField()
+    mea = models.FloatField()
+    consphone = models.FloatField()
+    officegrant = models.FloatField()
+    office = models.FloatField()
+    ssa = models.FloatField()
+    mobile = models.FloatField()
+    travel = models.FloatField()
+    committeetravel = models.FloatField()
+    isdn = models.FloatField()
+    trainingtravel = models.FloatField()
+    cttee_ent = models.FloatField()
+    ipu = models.FloatField()
+    bpa = models.FloatField()
 
 class Alert(models.Model):
     alert_id = models.IntegerField(primary_key=True)
@@ -145,7 +179,7 @@ class Member(models.Model):
     first_name = models.CharField(max_length=300, blank=True)
     last_name = models.CharField(max_length=765)
     constituency = models.CharField(max_length=300)
-    party = models.CharField(max_length=300)
+    party = models.CharField(choices=PARTIES,max_length=300)
     entered_house = models.DateField()
     left_house = models.DateField()
     entered_reason = models.CharField(max_length=72,choices=ENTER_REASONS)
