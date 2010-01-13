@@ -5,10 +5,12 @@ import hansardcalendar
 from django.http import HttpResponse
 from django.http import Http404
 from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.template import RequestContext, loader, Context
 from django.db.models import Q
-from parliament.models import Member, Hansard
+from parliament.models import Member, Hansard, Expense
 from django.utils.safestring import mark_safe
+from time import strftime, strptime
+
 
 
 def index(request):
@@ -31,4 +33,17 @@ def hansarddetail(request, epobject_id):
     return render_to_response('parliament/hansard_detail.html', {'parent':parent, 'hansards': h, },
         context_instance=RequestContext(request))
 
+def expenses_xml(request,year):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(mimetype='text/xml')
+
+    exes_data = Expense.objects.filter(year=strftime("%Y-%m-%d",strptime(year,"%Y"))) # time.strptime(datestring,"%d%b%Y")
+
+    t = loader.get_template('parliament/twfy_expenses_xml.txt')
+    c = Context({
+        'data': exes_data,
+        'year': year,
+    })
+    response.write(t.render(c))
+    return response
 

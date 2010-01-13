@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<publicwhip>
+<!-- {{ year }} -->
+{% for person in data %}
+<personinfo id="uk.org.publicwhip/person/{{ person.person.pk }}" 
+expenses{{ year }}_col1="{{ person.salary }}" 
+expenses{{ year }}_col2="{{ person.travel }}" 
+expenses{{ year }}_col3="{{ person.mobile }}" 
+expenses{{ year }}_col4="{{ person.mea }}" 
+expenses{{ year }}_col5="{{ person.office }}" 
+expenses{{ year }}_col6="{{ person.officegrant }}" 
+expenses{{ year }}_col7="{{ person.consphone }}" 
+expenses{{ year }}_col8="{{ person.cta }}" 
+expenses{{ year }}_col9="{{ person.isdn }}" 
+expenses{{ year }}_col10="{{ person.allowance }}" 
+expenses{{ year }}_col11="{{ person.ssa }}" 
+expenses{{ year }}_col12="{{ person.committeetravel }}" 
+expenses{{ year }}_col13="{{ person.cttee_ent }}" 
+expenses{{ year }}_col14="{{ person.trainingtravel }}" 
+expenses{{ year }}_col15="{{ person.bpa }}" 
+expenses{{ year }}_col16="{{ person.ipu }}" 
+/>
+{% endfor %}
+</publicwhip>
+
+{% comment %} 
+
+    year = models.DateField()
+    person = models.ForeignKey(Person)
+    salary = models.FloatField()
+    allowance = models.FloatField()
+    cta = models.FloatField()
+    mea = models.FloatField()
+    consphone = models.FloatField()
+    officegrant = models.FloatField()
+    office = models.FloatField()
+    ssa = models.FloatField()
+    mobile = models.FloatField()
+    travel = models.FloatField()
+    committeetravel = models.FloatField()
+    isdn = models.FloatField()
+    trainingtravel = models.FloatField()
+    cttee_ent = models.FloatField()
+    ipu = models.FloatField()
+    bpa = models.FloatField()
+
+{% endcomment %}
+

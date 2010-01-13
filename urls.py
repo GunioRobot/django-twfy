@@ -35,4 +35,6 @@ urlpatterns = patterns('',
     (r'^debates/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', debates_dict),
     (r'^debates/(?P<epobject_id>\d+)/$', 'parliament.views.hansarddetail'),
     
+    (r'^expenses/expenses(?P<year>\d{4})\.xml$', 'parliament.views.expenses_xml'),
+    
 )

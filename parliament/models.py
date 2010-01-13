@@ -10,7 +10,7 @@
 # into your database.
 
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 
 CONFIRM_STATES = (
     (0,_('No')),
@@ -194,13 +194,13 @@ class Member(models.Model):
         return self.first_name + ' ' + self.last_name
 
 class Moffice(models.Model):
-    moffice_id = models.IntegerField(primary_key=True,db_column='moffice_id')
-    dept = models.CharField(max_length=765)
+    moffice_id = models.AutoField(primary_key=True,db_column='moffice_id')
+    dept = models.CharField(max_length=765,blank=True)
     position = models.CharField(max_length=600)
     from_date = models.DateField()
     to_date = models.DateField()
     person = models.ForeignKey(Person,db_column='person')
-    source = models.CharField(max_length=765)
+    source = models.CharField(max_length=765,blank=True)
     class Meta:
         db_table = u'moffice'
 	verbose_name = _("Ministerial position")
