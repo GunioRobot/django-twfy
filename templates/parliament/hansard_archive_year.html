@@ -4,80 +4,80 @@
 
 {% block content %}
 
-<h2>Dáil Debates</h2>
+<h2>{{ title }}</h2>
 <h3>Debates for {{ year }}</h2>
 
 {% if date_list %}
 	<div class="calendar">
 		<table border="0">
 		<caption>January {{ year }}</caption>
-		{% monthcal year 01 %}
+		{% monthcal year 01 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>February {{ year }}</caption>
-		{% monthcal year 02 %}
+		{% monthcal year 02 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>March {{ year }}</caption>
-		{% monthcal year 03 %}
+		{% monthcal year 03 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>April {{ year }}</caption>
-		{% monthcal year 04 %}
+		{% monthcal year 04 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>May {{ year }}</caption>
-		{% monthcal year 05 %}
+		{% monthcal year 05 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>June {{ year }}</caption>
-		{% monthcal year 06 %}
+		{% monthcal year 06 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>July {{ year }}</caption>
-		{% monthcal year 07 %}
+		{% monthcal year 07 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>August {{ year }}</caption>
-		{% monthcal year 08 %}
+		{% monthcal year 08 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>September {{ year }}</caption>
-		{% monthcal year 09 %}
+		{% monthcal year 09 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>October {{ year }}</caption>
-		{% monthcal year 10 %}
+		{% monthcal year 10 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>November {{ year }}</caption>
-		{% monthcal year 11 %}
+		{% monthcal year 11 house path %}
 		</table>
 	</div>
 	<div class="calendar">
 		<table border="0">
 		<caption>December {{ year }}</caption>
-		{% monthcal year 12 %}
+		{% monthcal year 12 house path %}
 		</table>
 	</div>
 

@@ -10,11 +10,10 @@ class AnonvotesInline(admin.TabularInline):
 
 class MofficeInline(admin.TabularInline):
         model = Moffice
-        exclude = ('moffice_id',)
         
 class ExpenseInline(admin.TabularInline):
         model = Expense
-        
+
 class MemberAdmin(admin.ModelAdmin):
         list_display = ('__unicode__','party','constituency','entered_house','entered_reason','left_house')
         list_filter = ('house','left_reason')

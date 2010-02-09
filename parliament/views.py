@@ -14,7 +14,7 @@ from time import strftime, strptime
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at django-twfy.parliament.views.index.")
+    return render_to_response('parliament/front.html',)
 
 def memberdetail(request, member_id):
     try:

@@ -82,10 +82,12 @@ def month_cal(baseurl, year=date.today().year, month=date.today().month, app_lab
 register.inclusion_tag('parliament/calendar.html')(month_cal)
 
 
-def monthcal(year, month):
+def monthcal(year, month, major, path):
     year = int(year)
     month = int(month)
-    event_list = Hansard.objects.values('hdate').distinct().filter(hdate__year=year,hdate__month=month)
+    major = int(major)
+    urlprefix = path
+    event_list = Hansard.objects.values('hdate').distinct().filter(hdate__year=year,hdate__month=month,major=major)
     first_day_of_month = date(year, month, 1)
     last_day_of_month = get_last_day_of_month(year, month)
     first_day_of_calendar = first_day_of_month - timedelta(first_day_of_month.weekday())
@@ -118,7 +120,7 @@ def monthcal(year, month):
         i += 1
         day += timedelta(1)
 
-    return {'calendar': month_cal, 'headers': week_headers}
+    return {'calendar': month_cal, 'headers': week_headers, 'path' : urlprefix,}
 
 register.inclusion_tag('parliament/month_cal.html')(monthcal)
 

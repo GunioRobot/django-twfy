@@ -122,7 +122,7 @@ class Expense(models.Model):
     bpa = models.FloatField()
 
 class Alert(models.Model):
-    alert_id = models.IntegerField(primary_key=True)
+    alert_id = models.AutoField(primary_key=True)
     email = models.CharField(max_length=765)
     criteria = models.CharField(max_length=765)
     deleted = models.IntegerField()
@@ -137,7 +137,7 @@ class Alert(models.Model):
 
 
 class Twfyuser(models.Model):
-    user_id = models.IntegerField(primary_key=True)
+    user_id = models.AutoField(primary_key=True,db_column='user_id')
     firstname = models.CharField(max_length=765)
     lastname = models.CharField(max_length=765)
     email = models.CharField(max_length=765)
@@ -161,7 +161,7 @@ class Twfyuser(models.Model):
         return unicode(self.user_id) + " " + self.firstname + " " + self.lastname
 	
 class ApiKey(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(Twfyuser,db_column='user_id')
     api_key = models.CharField(unique=True, max_length=72)
     commercial = models.IntegerField(choices=CONFIRM_STATES)
@@ -174,7 +174,7 @@ class ApiKey(models.Model):
         return self.api_key
 
 class Member(models.Model):
-    id = models.IntegerField(primary_key=True,db_column='member_id')
+    id = models.AutoField(primary_key=True,db_column='member_id')
     house = models.ForeignKey(Chamber,db_column='house')
     first_name = models.CharField(max_length=300, blank=True)
     last_name = models.CharField(max_length=765)
@@ -206,7 +206,7 @@ class Moffice(models.Model):
 	verbose_name = _("Ministerial position")
         
 class Hansard(models.Model):
-    id = models.IntegerField(primary_key=True,db_column='epobject_id')
+    id = models.AutoField(primary_key=True,db_column='epobject_id')
     gid = models.CharField(unique=True, max_length=255, blank=True)
     htype = models.IntegerField(choices=HTYPES)
     speaker_id = models.ForeignKey('Member',db_column='speaker_id')
@@ -272,7 +272,7 @@ class Indexbatch(models.Model):
         return unicode(self.indexbatch_id)
 
 class SearchQueryLog(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     query_string = models.TextField(blank=True)
     page_number = models.IntegerField(null=True, blank=True)
     count_hits = models.IntegerField(null=True, blank=True)
@@ -285,6 +285,15 @@ class SearchQueryLog(models.Model):
 
 
 """
+class Personinfo(models.Model):
+    person_id = models.ForeignKey('Person',db_column='person_id')
+    data_key = models.CharField(unique=True, max_length=255)
+    data_value = models.TextField()
+    lastupdate = models.DateTimeField()
+    class Meta:
+        db_table = u'personinfo'
+
+
 class Gidredirect(models.Model):
     gid_from = models.ForeignKey('Epobject',db_column="gid_from",unique=True)
     gid_to = models.ForeignKey('Epobject',db_column="gid_to",blank=True)
@@ -312,16 +321,6 @@ class Editqueue(models.Model):
     reason = models.CharField(max_length=765, blank=True)
     class Meta:
         db_table = u'editqueue'
-
-class Expenses(models.Model):
-    id = models.IntegerField(primary_key=True)
-    year = models.IntegerField()
-    who = models.CharField(max_length=192)
-    top = models.CharField(max_length=75)
-    leftoffset = models.CharField(max_length=75)
-    content = models.CharField(max_length=768, blank=True)
-    class Meta:
-        db_table = u'expenses'
 
 class Glossary(models.Model):
     glossary_id = models.IntegerField(primary_key=True)
@@ -362,14 +361,6 @@ class PbcMembers(models.Model):
     attending = models.IntegerField()
     class Meta:
         db_table = u'pbc_members'
-
-class Personinfo(models.Model):
-    person_id = models.IntegerField()
-    data_key = models.CharField(unique=True, max_length=300)
-    data_value = models.TextField()
-    lastupdate = models.DateTimeField()
-    class Meta:
-        db_table = u'personinfo'
 
 class PostcodeLookup(models.Model):
     postcode = models.CharField(max_length=30, primary_key=True)
