@@ -27,17 +27,29 @@
         
 	{% ifnotequal hansard.htype 10 %}
         {% ifnotequal hansard.htype 11 %}
-        <div class="stripe-{% cycle '1' '2' %}" id="g{{ hansard.gid|slice:"36:" }}">    
-	    <div class="main">
+
+        {% if hansard.speaker_id %}
+        <div class="stripe-{% cycle '1' '2' %}" id="g{{ hansard.gid|slice:"36:" }}">
+            <div class="main">
             <a name="g{{ hansard.gid|slice:"36:" }}"></a>
             <p class="speaker"><a href="/members/{{ hansard.speaker_id.id }}" title="See more information about {{ hansard.speaker_id.first_name }} {{ hansard.speaker_id.last_name }}"><img src="http://www.kildarestreet.com/images/mps/{{ hansard.speaker_id.person_id.id }}.jpg" class="portrait" alt="Photo of {{ hansard.speaker_id.first_name }} {{ hansard.speaker_id.last_name }}"><strong>{{ hansard.speaker_id.first_name }} {{ hansard.speaker_id.last_name }}</strong></a> <small>({{ hansard.speaker_id.party }}, {{ hansard.speaker_id.constituency }})</small></p>
             <p>{{ hansard.epobject.body|safe }}</p>
             </div>
         </div>
+        {% endif %}
+        {% if not hansard.speaker_id %}
+        <div class="stripe-time-2">
+                <div class="main">
+                        <p>{{ hansard.epobject.body|safe }}</p>
+                </div>
+            	<div class="sidebar">
+                </div>
+                <div class="break"></div>
+	</div>
+        {% endif %}
+
         {% endifnotequal %}
         {% endifnotequal %}
 {% endfor %}
 
 {% endblock %}
-
-

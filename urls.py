@@ -15,10 +15,10 @@ seanad_context = {'house':7,'path':'seanad','title':'Seanad Debates',}
 wrans_context = {'house':3,'path':'wrans','title':'Written Answers',}
 
 debates_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate", 'extra_context':dail_context,}
-debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct()} }
+debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct(),"context":dail_context,} }
 
 sendebates_dict = { 'queryset': Hansard.objects.filter(major=7,htype=10).order_by("hpos"), "date_field": "hdate",  'extra_context':seanad_context,}
-sendebates_month_dict = { 'queryset': Hansard.objects.filter(major=7,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct()} }
+sendebates_month_dict = { 'queryset': Hansard.objects.filter(major=7,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct(),"context":seanad_context,} }
 
 urlpatterns = patterns('',
     # Example:

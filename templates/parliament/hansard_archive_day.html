@@ -4,8 +4,8 @@
 {% block title %}Debates for {{ day|date:"l F jS Y" }}  | django-twfy{% endblock %}
 
 {% block content %}
-	<h2>{{ title }}</h2>
-	<h3>{{ day|date:"l F jS, Y" }}</h3>
+	<h2>{{ context.title }}</h2>
+	<h3>{{ day|date:"l, F jS Y" }}</h3>
 	{% if object_list %}
 		<ul>
 		{% for debate in object_list %}
