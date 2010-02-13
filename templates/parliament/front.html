@@ -5,18 +5,11 @@
 {% block content %}
 
 <h2>Front page</h2>
-<h3>Showing only links to pages which actually exist right now</h3>
+<p></p>
 
-<h4>People</h4>
         <p>
                 <ul>
                         <li><a href="/members/">List of all TDs and Senators</a></li>
-                </ul>
-        </p>
-
-<h4>Debates (Dáil)</h4>
-        <ul>
-                <p>
                         <li>Dáil
                                 <ul>
                                         <li><a href="/debates/2004/">2004</a></li>
@@ -28,7 +21,64 @@
                                         <li><a href="/debates/2010/">2010</a></li>
                                 </ul>
                         </li>
-                </p>
-        </ul>
-
+                        <li>Seanad
+                                <ul>
+                                        <li><a href="/seanad/2004/">2004</a></li>
+                                        <li><a href="/seanad/2005/">2005</a></li>
+                                        <li><a href="/seanad/2006/">2006</a></li>
+                                        <li><a href="/seanad/2007/">2007</a></li>
+                                        <li><a href="/seanad/2008/">2008</a></li>
+                                        <li><a href="/seanad/2009/">2009</a></li>
+                                        <li><a href="/seanad/2010/">2010</a></li>
+                                </ul>
+                        </li>
+                        <li>Written Answers
+                                <ul>
+                                        <li><a href="/wrans/2004/">2004</a></li>
+                                        <li><a href="/wrans/2005/">2005</a></li>
+                                        <li><a href="/wrans/2006/">2006</a></li>
+                                        <li><a href="/wrans/2007/">2007</a></li>
+                                        <li><a href="/wrans/2008/">2008</a></li>
+                                        <li><a href="/wrans/2009/">2009</a></li>
+                                        <li><a href="/wrans/2010/">2010</a></li>
+                                </ul>
+                        </li>
+               </ul>
+        </p>
 {% endblock %}
+
+{% block sidebar %}
+<h3>TODO</h3>
+<p><ul>
+        <li>Split /members/ into /tds/ and /senators/</li>
+        <li>Member pages need all their information boxes and sidebars:
+                <ul>
+                        <li>Recent Appearances</li>
+                        <li>Numerology</li>
+                        <li>Search within</li>
+                        <li>Others in constituency</li>
+                        <li>Feed links</li>
+                        <li>Useful Links</li>
+                        <li>Moffice and term lists</li>
+                </ul>
+        </li>
+        <li>New homepage. This one sucks.</li>
+        <li>Add/fix header menu system</li>
+        <li>Dáil homepage</li>
+        <li>Seanad homepage</li>
+        <li>Wrans homepage</li>
+        <li>Debates: add speaker info to speeches</li>
+        <li>Day indexes: include subheaders, links, speech counts (especially on wrans) </li>
+        <li>Comments</li>
+        <li>Trackbacks (new!)</li>
+        <li>Akismet (new!)</li>
+        <li>Import old comments</li>
+        <li>Attach xapian DB to search function</li>
+        <li>RSS for TDs and search queries</li>
+        <li>Attach TWFYuser to Django user auth as user profiles</li>
+        <li>Import old users</li>
+        <li>Email alert signup/management</li>
+    </ul>
+</p>
+{% endblock %}
+

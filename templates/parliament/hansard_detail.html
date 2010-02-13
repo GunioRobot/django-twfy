@@ -38,13 +38,10 @@
         </div>
         {% endif %}
         {% if not hansard.speaker_id %}
-        <div class="stripe-time-2">
+        <div class="stripe-time-{% cycle '1' '2' %}">
                 <div class="main">
                         <p>{{ hansard.epobject.body|safe }}</p>
                 </div>
-            	<div class="sidebar">
-                </div>
-                <div class="break"></div>
 	</div>
         {% endif %}
 

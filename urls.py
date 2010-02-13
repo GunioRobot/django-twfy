@@ -20,6 +20,10 @@ debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).orde
 sendebates_dict = { 'queryset': Hansard.objects.filter(major=7,htype=10).order_by("hpos"), "date_field": "hdate",  'extra_context':seanad_context,}
 sendebates_month_dict = { 'queryset': Hansard.objects.filter(major=7,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct(),"context":seanad_context,} }
 
+wrans_dict = { 'queryset': Hansard.objects.filter(major=3,htype=10).order_by("hpos"), "date_field": "hdate", 'extra_context':wrans_context,}
+wrans_month_dict = { 'queryset': Hansard.objects.filter(major=3,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct(),"context":wrans_context,} }
+
+
 urlpatterns = patterns('',
     # Example:
     #(r'^djangowfy/', include('django-twfy.parliament.urls')),
@@ -46,6 +50,12 @@ urlpatterns = patterns('',
     (r'^seanad/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', sendebates_dict),
     (r'^seanad/(?P<epobject_id>\d+)/$', 'parliament.views.hansarddetail'),
 
+    (r'^wrans/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/$', 'django.views.generic.date_based.archive_day', wrans_month_dict),
+    (r'^wrans/(?P<year>\d{4})/(?P<month>\d{2})/$', 'django.views.generic.date_based.archive_month', wrans_month_dict),
+    (r'^wrans/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', wrans_dict),
+    (r'^wrans/(?P<epobject_id>\d+)/$', 'parliament.views.hansarddetail'),
+
+    
 
     (r'^expenses/expenses(?P<year>\d{4})\.xml$', 'parliament.views.expenses_xml'),
     
