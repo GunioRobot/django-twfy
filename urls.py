@@ -7,12 +7,14 @@ from parliament import views
 from django.contrib import admin
 admin.autodiscover()
 
+nohouse_context = {'house_name':'Houses of the Oireachtas', }
+dail_context = {'house':1,'path':'debates','title':'Dáil Debates','house_name':'Dáil Éireann',}
+seanad_context = {'house':7,'path':'seanad','title':'Seanad Debates','house_name':'Seanad Éireann',}
+wrans_context = {'house':3,'path':'wrans','title':'Written Answers','house_name':'Dáil Éireann',}
 
-members_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office").order_by("last_name"), }
-
-dail_context = {'house':1,'path':'debates','title':'Dáil Debates',}
-seanad_context = {'house':7,'path':'seanad','title':'Seanad Debates',}
-wrans_context = {'house':3,'path':'wrans','title':'Written Answers',}
+members_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office").order_by("last_name"), 'extra_context':nohouse_context,}
+tds_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office",house=1).order_by("last_name"), 'extra_context':dail_context,}
+senators_dict = { 'queryset': Member.objects.filter(left_reason="still_in_office",house=4).order_by("last_name"), 'extra_context':seanad_context,}
 
 debates_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate", 'extra_context':dail_context,}
 debates_month_dict = { 'queryset': Hansard.objects.filter(major=1,htype=10).order_by("hpos"), "date_field": "hdate","month_format":"%m", 'extra_context': {"dates":Hansard.objects.values('hdate').distinct(),"context":dail_context,} }
@@ -37,6 +39,8 @@ urlpatterns = patterns('',
     
     (r'^$', 'parliament.views.index'),
     (r'^members/$', 'django.views.generic.list_detail.object_list', members_dict),
+    (r'^tds/$', 'django.views.generic.list_detail.object_list', tds_dict),
+    (r'^senators/$', 'django.views.generic.list_detail.object_list', senators_dict),
     (r'^members/(?P<member_id>\d+)/$', 'parliament.views.memberdetail'),
     
     #  This one shows a debate index for Major type=1 at (eg) debates/2009/07/02
@@ -55,8 +59,8 @@ urlpatterns = patterns('',
     (r'^wrans/(?P<year>\d{4})/$', 'django.views.generic.date_based.archive_year', wrans_dict),
     (r'^wrans/(?P<epobject_id>\d+)/$', 'parliament.views.hansarddetail'),
 
-    
-
     (r'^expenses/expenses(?P<year>\d{4})\.xml$', 'parliament.views.expenses_xml'),
-    
+
+    (r'^search/$','parliament.views.search'),
+
 )

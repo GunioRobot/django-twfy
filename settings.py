@@ -62,10 +62,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
+INTERNAL_IPS = ('192.168.2.101',
+                '79.97.111.189',)
+
 ROOT_URLCONF = 'django-twfy.urls'
+
+XAPIAN_DB = '/home/johnh/Desktop/kforge/svn/trunk/django-twfy/search/twfy_search'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -96,5 +102,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.humanize',
     'django.contrib.flatpages',
+    'debug_toolbar',
     'django-twfy.parliament',
 )

@@ -10,6 +10,9 @@ from django.db.models import Q
 from parliament.models import Member, Hansard, Expense
 from django.utils.safestring import mark_safe
 from time import strftime, strptime
+import sys
+import re
+import xapian
 
 
 
@@ -47,3 +50,56 @@ def expenses_xml(request,year):
     response.write(t.render(c))
     return response
 
+def search(request):
+    searchdb = settings.XAPIAN_DB
+    database = xapian.Database(searchdb)
+    enquire = xapian.Enquire(database)
+    if request.GET.get('s'):
+        query_string = request.GET.get('s')
+    else:
+        query_string = ''
+
+    response = HttpResponse(mimetype='text/html')
+
+    qp = xapian.QueryParser()
+    stemmer = xapian.Stem("english")
+    qp.set_stemmer(stemmer)
+    qp.set_database(database)
+    qp.set_stemming_strategy(xapian.QueryParser.STEM_SOME)
+    qp.set_default_op(xapian.Query.OP_AND)
+    qp.add_boolean_prefix('speaker', 'S');
+    qp.add_boolean_prefix('major', 'M');
+    qp.add_boolean_prefix('date', 'D');
+    qp.add_boolean_prefix('batch', 'B');
+    qp.add_boolean_prefix('segment', 'U');
+    qp.add_boolean_prefix('department', 'G');
+    qp.add_boolean_prefix('party', 'P');
+    qp.add_boolean_prefix('column', 'C');
+    qp.add_boolean_prefix('gid', 'Q');
+
+    query = qp.parse_query(query_string)
+    
+    enquire.set_query(query)
+    matches = enquire.get_mset(0, 20)
+
+    class Hit:
+        pass
+    
+    resultset = []
+    for m in matches:
+        current = Hit()
+        current.rank = m.rank + 1
+        current.docid = m.docid
+        current.path = m.document.get_data()
+        current.percent = m.percent
+        
+        resultset.append(current)
+
+    t = loader.get_template('parliament/search.html')
+    c = Context ({
+            'resultcount': matches.get_matches_estimated(),
+            'results': resultset,
+            
+    })
+    response.write(t.render(c))
+    return response
