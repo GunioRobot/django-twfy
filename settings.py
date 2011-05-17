@@ -66,12 +66,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-INTERNAL_IPS = ('192.168.2.101',
+INTERNAL_IPS = ('192.168.2.105',
                 '79.97.111.189',)
 
 ROOT_URLCONF = 'django-twfy.urls'
 
-XAPIAN_DB = '/home/johnh/Desktop/kforge/svn/trunk/django-twfy/search/twfy_search'
+XAPIAN_DB = '/home/johnh/Desktop/kforge/svn/trunk/twfy_search'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
