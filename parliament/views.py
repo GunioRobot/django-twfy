@@ -1,5 +1,3 @@
-# Create your views here.
-
 import settings
 import hansardcalendar
 from django.http import HttpResponse
@@ -37,10 +35,9 @@ def hansarddetail(request, epobject_id):
         context_instance=RequestContext(request))
 
 def expenses_xml(request,year):
-    # Create the HttpResponse object with the appropriate CSV header.
     response = HttpResponse(mimetype='text/xml')
 
-    exes_data = Expense.objects.filter(year=strftime("%Y-%m-%d",strptime(year,"%Y"))) # time.strptime(datestring,"%d%b%Y")
+    exes_data = Expense.objects.filter(year=strftime("%Y-%m-%d",strptime(year,"%Y")))
 
     t = loader.get_template('parliament/twfy_expenses_xml.txt')
     c = Context({

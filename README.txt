@@ -3,11 +3,9 @@ Q:  Huh?
 
 A:  TheyWorkForYou.com is open source, and both Ireland and Australia have 
     copies running. However, it uses an 18th-century character set, in no way 
-    separates content from design (rendering it utterly immune to re-designing -
-    just ask the poor saps who had to try in the UK not so long ago), and 
-    contains PHP code that dates back to before PHP4 was even released.  In 
-    fact the current version of PHP (5.3) won't run it at all without generating
-    fatal errors.
+    separates content from design and the current version of PHP (5.3) won't 
+    run it at all without generating fatal errors. Which is really PHP's fault
+    for changing almost all its error handling rules.
     
 Q:  So...
 
@@ -21,13 +19,11 @@ A:  The DB schema in this one is reset to UTF-8, and we're dumping the entire
     (well, the bits used in Ireland anyway) has been described as Django models.
     
     Django is also templated.  And it more or less requires Unicode, which 
-    suits us because we think it'd be nice to show an alphabetical list of our 
-    members of Parliament in, ya know. Alphabetical order.
+    suits us for a large number of reasons, including future support for >1 
+    languages.
     
     And it supports i18n. Support for which is slightly sketchy here at the 
-    moment but do please step in and mark strings I haven't got to yet, then use
-    (eg) Transifex to crowdsource a local version.  Yours'll show people in the
-    right order too. Because of the unicodes, like.
+    moment but do please step in and mark strings I 
     
 Q:  I want to make a version of TheyWorkForYou.com which works in my country
 
