@@ -2,14 +2,16 @@
 Q:  Huh?
 
 A:  TheyWorkForYou.com is open source, and both Ireland and Australia have 
-    copies running. However, it uses an 18th-century character set, in no way 
-    separates content from design and the current version of PHP (5.3) won't 
-    run it at all without generating fatal errors. Which is really PHP's fault
-    for changing almost all its error handling rules.
+    copies running. However, it was developed over a long period of time with
+    only one jurisdiction in mind (which is fine for them, less so for us), 
+    uses therefore a very problematic character set, in no way separates content
+    from design and the current version of PHP (5.3) won't run it at all 
+    without generating fatal errors. Which is really PHP's fault for 
+    changing almost all its error handling rules.
     
 Q:  So...
 
-A:  So I'm rewriting the part of it that causes the concerns above.
+A:  So I'm rewriting part of it to deal with the concerns above.
 
 Q:  Which is?
 
@@ -23,11 +25,13 @@ A:  The DB schema in this one is reset to UTF-8, and we're dumping the entire
     languages.
     
     And it supports i18n. Support for which is slightly sketchy here at the 
-    moment but do please step in and mark strings I 
+    moment but do please step in and mark strings I didn't get to yet.
     
 Q:  I want to make a version of TheyWorkForYou.com which works in my country
 
-A:  Then install it, then install this and use it for the web-facing side.
+A:  Then install it, then install this and use it for the web-facing side. 
+    A detailed INSTALL file will follow explaining the tweaks we've made, which
+    include some additional tables and recasting the whole DB as UTF8.
 
 Q:  What won't it do?
 
@@ -59,14 +63,16 @@ A:  Yeah. It's not finished yet.  It still needs:
           because it's a play, and it's from Ireland.  Plays are good because
           they have characters (members of Parliament) who say things (speeches)
           in discrete scenes (debates) which are surrounded by stage directions
-          (procedural text).
+          (procedural text). 
           
         * Probably other things.  We (kildarestreet.com) really need this thing
           to get finished and it's back on the boil, so to speak, so assume that
           we'll have a feature-complete Django clone of TWFY up and running 
           fairly soon now.  Later we'll discuss forking it into something that
           uses Haystack instead for search, but then you're pretty much on your
-          own with email alerts, sadly.
+          own with email alerts, sadly.  Rather more work would be needed at
+          the support-scripts end even than that to change the database from
+          MySQL to something else.
           
 --- John Handelaar, 2011-05-17 
         
