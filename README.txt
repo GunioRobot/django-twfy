@@ -72,5 +72,5 @@ A:  Yeah. It's not finished yet.  It still needs:
           uses Haystack instead for search, but then you're pretty much on your
           own with email alerts, sadly.
           
---- John Handelaar, 2011-05-17
+--- John Handelaar, 2011-05-17 
         
